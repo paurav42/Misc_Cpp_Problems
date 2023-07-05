@@ -44,17 +44,6 @@ class Premium:public Level{
     }
 };
 
-// class Maps{
-
-//     public:
-//      std::unordered_map<std::string, float> ticket_airline_multiplier{{"Delta", 0.55},
-//     {"LuigiAir", 0.85}, {"SouthWest", 0.95}, {"United", 0.88}};
-   
-//     Maps();
-    
-    
-// };
-
 class Airline{
 
     public:
