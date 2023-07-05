@@ -44,17 +44,33 @@ class Premium:public Level{
     }
 };
 
-std::unordered_map<std::string, float> ticket_airline_multiplier{{"Delta", 0.55},
-{"LuigiAir", 0.85}, {"SouthWest", 0.95}, {"United", 0.88}};
+// class Maps{
+
+//     public:
+//      std::unordered_map<std::string, float> ticket_airline_multiplier{{"Delta", 0.55},
+//     {"LuigiAir", 0.85}, {"SouthWest", 0.95}, {"United", 0.88}};
+   
+//     Maps();
+    
+    
+// };
 
 class Airline{
 
     public:
     Ticket* ticket;
     Level* operatingLevel;
+    //Maps* mps;
+    static std::unordered_map<std::string, float> ticket_airline_multiplier;
+
+    static void updateMapEntry(std::string str, float xplier){
+        //override if existing, else write new.
+        ticket_airline_multiplier[str] = xplier;
+    }
 
     Airline(Ticket* tick):ticket{tick}{
         operatingLevel = nullptr;
+        //ticket_airline_multiplier = mps->ticket_airline_multiplier;
     }
 
     Level* Instance(){
@@ -67,7 +83,7 @@ class Airline{
         }
         return nullptr;
     }
-
+    
     float calculateAirlineFare(){
         operatingLevel = Instance();
         float operatingcost  = operatingLevel->calculateBaseFare(ticket);
@@ -75,6 +91,16 @@ class Airline{
         return  operatingcost + travelcost;
     }
 };
+
+std::unordered_map<std::string, float> Airline::ticket_airline_multiplier{
+    {"Delta", 0.55},
+    {"LuigiAir", 0.85},
+    {"SouthWest", 0.95},
+    {"United", 0.88}
+};
+
+//    static Airline::ticket_airline_multiplier{{"Delta", 0.55},
+//     {"LuigiAir", 0.85}, {"SouthWest", 0.95}, {"United", 0.88}};
 
 //Level* Airline::operatingLevel = nullptr;
  std::vector<std::string> Parser(std::string st){
@@ -109,10 +135,6 @@ int main(){
 
         std::cout<< air1.calculateAirlineFare() << " for " << parsed_str[1] <<" "<< parsed_str[2]<<" " <<parsed_str[0]<<std::endl;
      }
-
-    // ID cost from class
-    // ID cost from Airline
-    
 
     return 0;
 }
