@@ -1,0 +1,114 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+/*
+class Solution {
+vector<vector> res;
+public:
+void rex(TreeNoderoot,int level)
+{
+if(root==NULL) return;
+if(level==res.size()) res.push_back({});
+res[level].push_back(root->val);
+rex(root->left, level+1);
+rex(root->right, level+1);
+}
+vector<vector> levelOrder(TreeNode root) {
+rex(root,0);
+return res;
+}
+};
+
+*/
+
+
+class Solution {
+    
+public:
+    //vector<vector<int>> ht;
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        
+        vector<vector<int>> op;
+        vector<TreeNode*> currnodes;
+        //vector<int> currval;
+        
+        if(root!=nullptr)
+        {
+            currnodes.push_back(root);
+        }
+        
+        while(!currnodes.empty())
+        {
+            vector<int> currval;
+            vector<TreeNode*> newnodes;
+            
+            int i = 0;
+            for(i=0; i< currnodes.size(); i++)
+            {
+                if(currnodes[i]->left!=nullptr)
+                {
+                    newnodes.push_back(currnodes[i]->left);
+                }
+                 if(currnodes[i]->right!=nullptr)
+                {
+                    newnodes.push_back(currnodes[i]->right);
+                }
+                
+                currval.push_back(currnodes[i]->val);
+            }
+            
+            currnodes = newnodes;
+            op.push_back(currval);
+            
+        }
+        
+    
+        return op;
+        
+        
+    }
+        
+        
+        
+    };
+    
+/*    
+public:
+    vector<vector<int>> ht;
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        // compute height of nodes: push to ith height of vector;
+        int idx = 0;
+        
+        treeHeight(root, idx);
+        return ht;
+        
+    }
+    
+   void treeHeight(TreeNode* root, int idx){
+        if (root == nullptr)
+        {
+            return;
+        }
+        
+       
+        if (ht.size() == idx)
+            ht.push_back({});
+        ht[idx].push_back(root->val);
+            
+        treeHeight(root->left,idx+1);
+        treeHeight(root->right,idx+1);
+    
+        
+        
+    }
+};
+
+*/
